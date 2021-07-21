@@ -7,7 +7,10 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
+// Candidates: atomDark, coldarkDark, night owl (need to customize)
+// @ts-ignore
+import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; // Error here due to bug in TS file in @types
 
 /**
  * No idea what is this, but this is from the react-markdown document for syntax highlighting
@@ -19,7 +22,7 @@ const components = {
     const match = /language-(\w+)/.exec(className || "");
     return !inline && match ? (
       <SyntaxHighlighter
-        style={dark}
+        style={coldarkDark}
         language={match[1]}
         PreTag="div"
         {...props}
