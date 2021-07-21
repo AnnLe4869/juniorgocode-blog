@@ -4,6 +4,36 @@ import React from "react";
 import { Post } from "../types";
 import Link from "next/link";
 
+import ReactMarkdown from "react-markdown";
+
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { dark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+
+/**
+ * No idea what is this, but this is from the react-markdown document for syntax highlighting
+ * Link: https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
+ * And it seem to works :)
+ */
+const components = {
+  code({ node, inline, className, children, ...props }: any) {
+    const match = /language-(\w+)/.exec(className || "");
+    return !inline && match ? (
+      <SyntaxHighlighter
+        style={dark}
+        language={match[1]}
+        PreTag="div"
+        {...props}
+      >
+        {String(children).replace(/\n$/, "")}
+      </SyntaxHighlighter>
+    ) : (
+      <code className={className} {...props}>
+        {children}
+      </code>
+    );
+  },
+};
+
 export default function DetailedPost(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
@@ -17,7 +47,9 @@ export default function DetailedPost(
 
       <h1>{props.post.title}</h1>
 
-      <p>{props.post.content}</p>
+      <ReactMarkdown components={components}>
+        {props.post.content}
+      </ReactMarkdown>
     </div>
   );
 }
