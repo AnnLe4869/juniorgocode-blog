@@ -7,6 +7,7 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import styles from "../styles/DetailPost.module.css";
 
 // Candidates: atomDark, coldarkDark, night owl (need to customize)
 // @ts-ignore
@@ -47,12 +48,13 @@ export default function DetailedPost(
       <Link href="/">
         <a>Go back to Home</a>
       </Link>
-
       <h1>{props.post.title}</h1>
-
-      <ReactMarkdown components={components}>
-        {props.post.content}
-      </ReactMarkdown>
+      {/* TODO: Need to implement NextJS Image component for the img element */}
+      <div className={styles.container}>
+        <ReactMarkdown components={components}>
+          {props.post.content}
+        </ReactMarkdown>
+      </div>
     </div>
   );
 }
