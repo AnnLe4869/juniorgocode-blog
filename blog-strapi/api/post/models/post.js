@@ -14,11 +14,18 @@ module.exports = {
   lifecycles: {
     async beforeCreate(data) {
       if (data.title) {
+        // Automatically create slug from the title
         data.slug = slugify(data.title, { lower: true });
+        /**
+         * TODO: Adding http://localhost:1337 when we use media (i.e image, etc.)
+         * As of for now, the rich text use relative path to the media, which won't work when we use API endpoint
+         * We need to use ABSOLUTE PATH for media saved on Strapi
+         */
       }
     },
     async beforeUpdate(params, data) {
       if (data.title) {
+        // Automatically create slug from the title
         data.slug = slugify(data.title, { lower: true });
       }
     },
