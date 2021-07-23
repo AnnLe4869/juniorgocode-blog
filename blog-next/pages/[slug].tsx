@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Post } from "../types";
 import Link from "next/link";
+import Image from "next/image";
 
 import ReactMarkdown from "react-markdown";
 
@@ -17,6 +18,12 @@ import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; //
  * No idea what is this, but this is from the react-markdown document for syntax highlighting
  * Link: https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
  * And it seem to works :)
+ *
+ * Reason(guessing): it take the name of the element (i.e <code>, <img>, etc.) as key and
+ * the value is a function that return a React element.
+ * Link: https://github.com/vercel/next.js/discussions/18383 and there is a link to a blog about solving for <img>
+ * Note that they use renderer property, which is deprecated and the modern one (with same syntax) is components
+ *
  */
 const components = {
   code({ node, inline, className, children, ...props }: any) {
@@ -34,6 +41,17 @@ const components = {
       <code className={className} {...props}>
         {children}
       </code>
+    );
+  },
+  img(image: any) {
+    return (
+      <div style={{ position: "relative", height: "500px" }}>
+        <Image
+          src={`http://localhost:1337${image.src}`}
+          alt={image.alt}
+          layout="fill"
+        />
+      </div>
     );
   },
 };
