@@ -16,13 +16,16 @@ import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; //
 
 /**
  * No idea what is this, but this is from the react-markdown document for syntax highlighting
- * Link: https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
+ * * Link: https://github.com/remarkjs/react-markdown#use-custom-components-syntax-highlight
  * And it seem to works :)
  *
- * Reason(guessing): it take the name of the element (i.e <code>, <img>, etc.) as key and
+ * * Reason(guessing): it take the name of the element (i.e <code>, <img>, etc.) as key and
  * the value is a function that return a React element.
  * Link: https://github.com/vercel/next.js/discussions/18383 and there is a link to a blog about solving for <img>
  * Note that they use renderer property, which is deprecated and the modern one (with same syntax) is components
+ *
+ * !Warning: I have to use `any` type here because I cannot figure out the correct type for the function parameter.
+ * !Normal HTMLElement won't work at all
  *
  */
 const components = {
@@ -43,16 +46,28 @@ const components = {
       </code>
     );
   },
-  img(image: any) {
-    return (
-      <div className={styles.imageContainer}>
-        <Image
-          src={`http://localhost:1337${image.src}`}
-          alt={image.alt}
-          layout="fill"
-        />
-      </div>
-    );
+
+  /**
+   * We use p element instead of just img element because we want to avoid the Warning message
+   * Reason is that, it look like the react-markdown auto wrap our image inside a p and we don't want that
+   */
+  p(paragraph: any) {
+    const { node } = paragraph;
+
+    if (node.children[0].tagName === "img") {
+      const image = node.children[0];
+      return (
+        <div className={styles.imageContainer}>
+          <Image
+            src={`http://localhost:1337${image.properties.src}`}
+            alt={image.properties.alt}
+            layout="fill"
+          />
+        </div>
+      );
+    }
+
+    return <p>{paragraph.children}</p>;
   },
 };
 
