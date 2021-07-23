@@ -12,7 +12,7 @@ import styles from "../styles/DetailPost.module.css";
 
 // Candidates: atomDark, coldarkDark, night owl (need to customize)
 // @ts-ignore
-import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; // Error here due to bug in TS file in @types
+import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; // !Error here due to bugs in TS file in @types/react-highlight
 
 /**
  * No idea what is this, but this is from the react-markdown document for syntax highlighting
@@ -48,7 +48,24 @@ const components = {
   },
 
   /**
-   * We use p element instead of just img element because we want to avoid the Warning message
+   * * We have to use img together with p
+   * For some reasons some page can work just fine without this img but some won't
+   * Best guess would be some difference in the markdown file
+   */
+  img(image: any) {
+    return (
+      <div className={styles.imageContainer}>
+        <Image
+          src={`http://localhost:1337${image.src}`}
+          alt={image.alt}
+          layout="fill"
+        />
+      </div>
+    );
+  },
+
+  /**
+   * We use p element TOGETHER WITH img element because we want to avoid the Warning message
    * Reason is that, it look like the react-markdown auto wrap our image inside a p and we don't want that
    */
   p(paragraph: any) {
