@@ -1,18 +1,16 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { Post } from "../types";
-import Link from "next/link";
-import Image from "next/image";
-
 import ReactMarkdown from "react-markdown";
-
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import styles from "../styles/DetailPost.module.css";
-
 // Candidates: atomDark, coldarkDark, night owl (need to customize)
 // @ts-ignore
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; // !Error here due to bugs in TS file in @types/react-highlight
+import gfm from "remark-gfm";
+import styles from "../styles/DetailPost.module.css";
+import { Post } from "../types";
 
 /**
  * No idea what is this, but this is from the react-markdown document for syntax highlighting
@@ -101,7 +99,7 @@ export default function DetailedPost(
       <h1>{props.post.title}</h1>
       {/* TODO: Need to implement NextJS Image component for the img element */}
       <div className={styles.container}>
-        <ReactMarkdown components={components}>
+        <ReactMarkdown components={components} remarkPlugins={[gfm]}>
           {props.post.content}
         </ReactMarkdown>
       </div>
