@@ -45,7 +45,7 @@ const components = {
   },
   img(image: any) {
     return (
-      <div style={{ position: "relative", height: "500px" }}>
+      <div className={styles.imageContainer}>
         <Image
           src={`http://localhost:1337${image.src}`}
           alt={image.alt}
