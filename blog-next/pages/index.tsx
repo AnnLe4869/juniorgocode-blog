@@ -5,9 +5,7 @@ import CardItem from "../components/CardItem";
 import { Post } from "../types";
 
 const useStyles = makeStyles(() => ({
-  root: {
-    textAlign: "center",
-  },
+  root: {},
 
   mainCard: {
     margin: "0 auto",
