@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
 
+    header: {
+      backgroundColor: "#000",
+    },
+
     title: {
       flexGrow: 1,
       cursor: "pointer",
@@ -33,7 +37,7 @@ export default function AppHeader() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.header}>
         <Toolbar>
           <Typography variant="h6" className={classes.title} onClick={goHome}>
             Junior go Code
