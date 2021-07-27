@@ -1,7 +1,6 @@
-import { Container } from "@material-ui/core";
+import { Container, makeStyles, Typography } from "@material-ui/core";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import ReactMarkdown from "react-markdown";
@@ -16,6 +15,25 @@ import gfm from "remark-gfm";
  */
 import styles from "../styles/DetailPost.module.css";
 import { Post } from "../types";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    maxWidth: 1000,
+    margin: "0 auto",
+  },
+  title: {
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(2),
+    fontWeight: 900,
+    textRendering: "optimizeLegibility",
+    fontSize: "2.5rem",
+    lineHeight: 1.1,
+  },
+  subtitle: {
+    marginBottom: theme.spacing(5),
+  },
+}));
 
 /**
  * No idea what is this, but this is from the react-markdown document for syntax highlighting
@@ -94,21 +112,28 @@ const components = {
 export default function DetailedPost(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  const router = useRouter();
+  const classes = useStyles();
 
   return (
-    <div>
-      <Link href="/">
-        <a>Go back to Home</a>
-      </Link>
-      <h1>{props.post.title}</h1>
-      {/* TODO: Need to implement NextJS Image component for the img element */}
-      <Container>
-        <ReactMarkdown components={components} remarkPlugins={[gfm]}>
-          {props.post.content}
-        </ReactMarkdown>
-      </Container>
-    </div>
+    <Container className={classes.root}>
+      {/* This is the title */}
+      <Typography component="h1" variant="h1" className={classes.title}>
+        {props.post.title}
+      </Typography>
+
+      {/* This is the day the post is written */}
+      <Typography
+        variant="subtitle1"
+        color="textSecondary"
+        className={classes.subtitle}
+      >
+        July 5, 2021
+      </Typography>
+
+      <ReactMarkdown components={components} remarkPlugins={[gfm]}>
+        {props.post.content}
+      </ReactMarkdown>
+    </Container>
   );
 }
 
