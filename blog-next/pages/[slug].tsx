@@ -1,3 +1,4 @@
+import { Container } from "@material-ui/core";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +10,10 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // @ts-ignore
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; // !Error here due to bugs in TS file in @types/react-highlight
 import gfm from "remark-gfm";
+/**
+ * Need to use CSS file style since we Material-UI useStyles that can only be used in a component
+ * And we the `components` that has in itself React component
+ */
 import styles from "../styles/DetailPost.module.css";
 import { Post } from "../types";
 
@@ -98,11 +103,11 @@ export default function DetailedPost(
       </Link>
       <h1>{props.post.title}</h1>
       {/* TODO: Need to implement NextJS Image component for the img element */}
-      <div className={styles.container}>
+      <Container>
         <ReactMarkdown components={components} remarkPlugins={[gfm]}>
           {props.post.content}
         </ReactMarkdown>
-      </div>
+      </Container>
     </div>
   );
 }

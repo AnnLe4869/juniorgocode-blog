@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       height: "40vh",
       margin: theme.spacing(3),
+      boxSizing: "border-box",
       /**
        * For detail on breakpoint size, go to
        * https://material-ui.com/customization/breakpoints/#default-breakpoints
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down("xs")]: {
         display: "block",
         height: "90vh",
-        maxHeight: "350px",
+        maxHeight: "450px",
       },
     },
 
@@ -47,6 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       flex: "1 0 auto",
+      paddingBottom: theme.spacing(3),
     },
   })
 );
@@ -77,10 +79,7 @@ export default function CardItem({ post }: { post: Post }) {
               <Typography variant="body1">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
                 euismod, nulla eu feugiat lacinia, sem tellus aliquet tellus,
-                quis eleifend sapien dui nec sem. Suspendisse non consequat
-                nulla. Aenean euismod nibh id lorem volutpat, at tincidunt
-                lectus sodales. Class aptent taciti sociosqu ad litora torquent
-                per conubia nostra, per inceptos himenaeos.
+                quis eleifend sapien dui nec sem.
               </Typography>
             </a>
           </Link>
