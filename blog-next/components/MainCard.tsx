@@ -8,24 +8,32 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Image from "next/image";
+import { Post } from "../types";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width: "100%",
+    height: "80vh",
+    maxWidth: 1000,
+    maxHeight: 600,
   },
   media: {
-    height: 140,
+    height: "60vh",
   },
 });
 
-export default function MainCard() {
+export default function MainCard(props: { post: Post }) {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia className={classes.media} title="Contemplative Reptile">
-          <Image src="/" alt="image title" layout="fill" />
+          <Image
+            src={`https://images.unsplash.com/photo-1627001158153-0aa8feead297?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80`}
+            alt="image title"
+            layout="fill"
+          />
         </CardMedia>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
