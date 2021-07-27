@@ -1,8 +1,8 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { Post } from "../types";
-import Link from "next/link";
-import MainCard from "../components/MainCard";
 import { Container, makeStyles } from "@material-ui/core";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import Link from "next/link";
+import CardItem from "../components/CardItem";
+import { Post } from "../types";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -19,32 +19,12 @@ export default function Home(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const classes = useStyles();
-  const [latestPost, ...otherPosts] = props.posts;
-
-  // Catch error in case there is no post
-  if (!props.posts) return <div>Currently no posts here</div>;
-  // Catch in case there is only one post
-  if (otherPosts.length < 1) {
-    return (
-      <Container>
-        <MainCard post={latestPost} />;
-      </Container>
-    );
-  }
 
   return (
     <Container className={classes.root}>
       {/* Loop over the posts */}
-      <MainCard post={latestPost} />
       {props.posts &&
-        props.posts.map((post) => (
-          <Link key={post.id} href={`/${post.slug}`}>
-            <a>
-              <h2>{post.title}</h2>
-              <div>{post.user.username}</div>
-            </a>
-          </Link>
-        ))}
+        props.posts.map((post) => <CardItem post={post} key={post.id} />)}
     </Container>
   );
 }
