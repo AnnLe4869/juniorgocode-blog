@@ -1,7 +1,6 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -129,6 +128,15 @@ export default function DetailedPost(
       >
         July 5, 2021
       </Typography>
+
+      {/* This is the cover image where we use external style file */}
+      <div className={styles.imageContainer}>
+        <Image
+          src={`http://localhost:1337${props.post.imageCover.url}`}
+          alt={props.post.title}
+          layout="fill"
+        />
+      </div>
 
       <ReactMarkdown components={components} remarkPlugins={[gfm]}>
         {props.post.content}
