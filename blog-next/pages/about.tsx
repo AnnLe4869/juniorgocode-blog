@@ -16,7 +16,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "2.5rem",
     lineHeight: 1.1,
   },
-  paragraph: {},
+  externalLink: {
+    color: "rgb(87, 62, 222)",
+    transition: "all 0.3s ease-in-out 0s",
+    textDecoration: "none",
+  },
 }));
 
 export default function About() {
@@ -26,12 +30,7 @@ export default function About() {
       <Typography component="h1" variant="h1" className={classes.title}>
         About me
       </Typography>
-      <Typography
-        component="p"
-        variant="h6"
-        className={classes.paragraph}
-        paragraph
-      >
+      <Typography component="p" variant="h6" paragraph>
         Hello world! I am Anh, a software engineer and soon to be a third year
         computer science student at University of California, San Diego. I start
         this blog with the purpose of helping other people and through that
@@ -41,8 +40,15 @@ export default function About() {
         I write this blog using my own experience and information I found
         online, and thus, there are, inevitably, errors and misinformation in
         some articles. If you think something is incorrect or should be adjusted
-        or should be changed for better, please let me know by sending me an
-        email or DM me via Twitter. I am happy to receive any feedbacks.
+        or should be changed for better, please let me know by{" "}
+        <a href="mailto:jrgocode@gmail.com" className={classes.externalLink}>
+          sending me an email
+        </a>{" "}
+        or{" "}
+        <a href="https://twitter.com/jrgocode" className={classes.externalLink}>
+          DM me via Twitter
+        </a>
+        . I am happy to receive any feedbacks.
       </Typography>
       <Typography component="p" variant="h6" paragraph>
         In my past time I enjoy learning new technologies or doing some small
@@ -57,15 +63,9 @@ export default function About() {
       </Typography>
 
       <Typography component="p" variant="h6" paragraph>
-        My contacts
-      </Typography>
-
-      <Typography component="p" variant="h6" paragraph>
-        Email: kunquan4869@gmail.com
-      </Typography>
-
-      <Typography component="p" variant="h6" paragraph>
-        Twitter: AnnLee
+        <a href="https://twitter.com/jrgocode" className={classes.externalLink}>
+          Follow me on Twitter
+        </a>
       </Typography>
     </Container>
   );
