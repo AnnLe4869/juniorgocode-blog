@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     maxWidth: 1000,
     margin: "0 auto",
+    marginBottom: theme.spacing(5),
   },
   title: {
     marginTop: theme.spacing(5),
