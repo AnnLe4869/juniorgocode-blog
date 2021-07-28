@@ -29,7 +29,9 @@ export default function Home(
 
 export const getStaticProps: GetStaticProps<{ posts: Post[] }> = async () => {
   // Get post from our Strapi API and sort by updated date
-  const res = await fetch("http://localhost:1337/posts?_sort=updated_at:desc");
+  const res = await fetch(
+    "http://localhost:1337/posts?_sort=published_at:desc"
+  );
   const posts: Post[] = await res.json();
 
   return {
