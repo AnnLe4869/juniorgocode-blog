@@ -12,7 +12,5 @@ const useStyles = makeStyles((theme) => ({
 export default function AppFooter() {
   const classes = useStyles();
 
-  return (
-    <footer className={classes.root}>Coded and Developed by Anh Le 2021</footer>
-  );
+  return <footer className={classes.root}>Developed by Anh Le 2021</footer>;
 }
