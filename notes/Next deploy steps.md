@@ -146,3 +146,91 @@ Solutions:
   ```
 
 ---> A working Next with Strapi app now
+
+## Modification
+
+1. At the moment, we got the error
+
+   > GET http://147.182.229.222/_next/data/3b4m0u8RlJGay0SENWMMM/sixth-post.json 404 (Not Found)
+
+   This suggest that our Nginx config file has to change.
+
+   Let try changing it to:
+
+   ```bash
+    server {
+       listen 80;
+       listen [::]:80;
+
+       server_name 147.182.229.222; # This is our server public IP address and we can change it to domain name
+
+        location /_next/ {
+            alias /var/www/next-strapi-deploy-test/blog-next/.next/;
+        }
+
+       location / {
+               proxy_pass http://127.0.0.1:3000; # 127.0.0.1 is self-inferred IP address and 3000 is the port Next
+       }
+   }
+   ```
+
+   ---> Make the app fail badly as now both the json file and image file become unable to render
+
+2. Try the image route
+
+   ```bash
+   location ~* \.(?:ico|svg|woff|woff2|ttf|otf|css|js|gif|jpe?g|png)$ {
+                  proxy_pass http://127.0.0.1:3000;
+
+                  proxy_http_version 1.1;
+          }
+   ```
+
+   ---> Image work but json file still 404
+
+3. Error is in the `NextJS` part itself and not caused by Nginx
+
+   After going to the port itself - which mean the app in raw without going through Nginx, we see that the error about `json` file still pertains, which suggests something is wrong with the NextJS server.
+
+   ---> Rerun `npm run build` and then `npm start` fix this problem. Now everything is up and running and no error
+
+4. Now reduce the config to just
+
+   ```bash
+   server {
+        listen 80;
+        listen [::]:80;
+
+        server_name 147.182.229.222; # This is our server public IP address and we can change it to domain name
+
+
+        location / {
+          proxy_pass http://127.0.0.1:3000;
+
+          # The entire setting below can be skipped and our app can work still PROPERLY
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_pass_request_headers      on;
+          proxy_cache_bypass $http_upgrade;
+        }
+   }
+   ```
+
+   ---> And the app work fine without any 404 and image work just fine.
+
+## LESSONS
+
+- When encounter a problem, before trying to solve it, make a list of what can cause this error from the most likely to least likely. Then check out one by one, from the **LEAST EFFORT** to check to the **MOST EFFORT** to check.
+
+- Always find a way to check the log and error message. Guessing where it went wrong without any solid error message will lead to nowhere. For Nginx, the log is in `/var/log/nginx` and to set up log format we don so in `/etc/nginx/nginx.conf`
+
+- The error log for Nginx will log error if the error is valid. If the error belong to the web server itself (in our case it's NextJS) then it won't log the message. You can check this out by changing the config on field `proxy_pass` and see how error log record error
+
+- Have to know how to log the error message and request.
+
+- Have to know how to clean up the error message
+
+- Any files in `/pages` of NextJS should only start with lowercase and not uppercase
