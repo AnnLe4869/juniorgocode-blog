@@ -131,14 +131,17 @@ export default function DetailedPost(
         July 5, 2021
       </Typography>
 
-      {/* This is the cover image where we use external style file */}
-      <div className={styles.imageContainer}>
-        <Image
-          src={`http://localhost:1337${props.post.imageCover.url}`}
-          alt={props.post.title}
-          layout="fill"
-        />
-      </div>
+      {/* This is the cover image where we use external style from CSS file */}
+
+      {props.post.imageCover.url && (
+        <div className={styles.imageContainer}>
+          <Image
+            src={`http://localhost:1337${props.post.imageCover.url}`}
+            alt={props.post.title}
+            layout="fill"
+          />
+        </div>
+      )}
 
       <ReactMarkdown components={components} remarkPlugins={[gfm]}>
         {props.post.content}

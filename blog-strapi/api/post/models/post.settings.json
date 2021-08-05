@@ -23,11 +23,6 @@
     "slug": {
       "type": "string"
     },
-    "user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "posts"
-    },
     "imageCover": {
       "model": "file",
       "via": "related",
@@ -39,6 +34,10 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "description": {
+      "type": "text",
+      "required": true
     }
   }
 }

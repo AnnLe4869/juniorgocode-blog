@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     marginLeft: theme.spacing(3),
     fontSize: "1rem",
+    "&:hover": {
+      textDecoration: "underline",
+    },
   },
 }));
 

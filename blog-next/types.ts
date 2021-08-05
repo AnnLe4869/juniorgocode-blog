@@ -6,8 +6,10 @@ type DefaultType = {
 
 export type User = Record<"username" | "email", string> & DefaultType;
 
-export type Post = Record<"title" | "content" | "slug", string> & {
-  user: User;
+export type Post = Record<
+  "title" | "description" | "content" | "slug",
+  string
+> & {
   imageCover: {
     url: string;
   };
