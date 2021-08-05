@@ -2,10 +2,13 @@ import { Container, makeStyles } from "@material-ui/core";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import CardItem from "../components/CardItem";
+import formatPostTime from "../helper/formatPostTime";
 import { Post } from "../types";
 
 const useStyles = makeStyles(() => ({
-  root: {},
+  root: {
+    maxWidth: "42rem",
+  },
 
   mainCard: {
     margin: "0 auto",
@@ -35,6 +38,6 @@ export const getStaticProps: GetStaticProps<{ posts: Post[] }> = async () => {
   const posts: Post[] = await res.json();
 
   return {
-    props: { posts },
+    props: { posts: posts.map((post) => formatPostTime(post)) },
   };
 };

@@ -8,6 +8,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // @ts-ignore
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; // !Error here due to bugs in TS file in @types/react-highlight
 import gfm from "remark-gfm";
+import formatPostTime from "../helper/formatPostTime";
 /**
  * Need to use CSS file style since we Material-UI useStyles that can only be used in a component
  * And we the `components` that has in itself React component
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(2),
-    fontWeight: 900,
+    fontWeight: 800,
     textRendering: "optimizeLegibility",
     fontSize: "2.5rem",
     lineHeight: 1.1,
@@ -158,7 +159,7 @@ export const getStaticProps: GetStaticProps<{ post: Post }, { slug: string }> =
     const post: Post = (await res.json())[0];
 
     return {
-      props: { post },
+      props: { post: formatPostTime(post) },
     };
   };
 
