@@ -1,5 +1,6 @@
 .imageContainer {
   width: 100%;
+  margin-bottom: 2rem;
 }
 
 .imageContainer > div {

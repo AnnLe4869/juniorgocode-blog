@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: "#3f51b5",
       fontWeight: 800,
       fontSize: "1.8rem",
-      marginBottom: theme.spacing(2),
+      marginBottom: theme.spacing(1),
     },
 
     articleHeader: {
