@@ -128,11 +128,10 @@ export default function DetailedPost(
         color="textSecondary"
         className={classes.subtitle}
       >
-        July 5, 2021
+        {props.post.created_at}
       </Typography>
 
       {/* This is the cover image where we use external style from CSS file */}
-
       {props.post.imageCover.url && (
         <div className={styles.imageContainer}>
           <Image
@@ -143,6 +142,7 @@ export default function DetailedPost(
         </div>
       )}
 
+      {/* This is the actual content we parse from markdown using ReactMarkdown with gfm plugin */}
       <ReactMarkdown components={components} remarkPlugins={[gfm]}>
         {props.post.content}
       </ReactMarkdown>

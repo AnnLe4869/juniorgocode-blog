@@ -41,12 +41,7 @@ export default function CardItem({ post }: { post: Post }) {
       </header>
 
       <section>
-        <Typography variant="body1">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum,
-          justo sit amet tincidunt finibus, turpis nisi imperdiet sem, sit amet
-          sodales diam augue molestie est. Maecenas justo nisl, tincidunt sed
-          felis quis, pharetra mattis velit.
-        </Typography>
+        <Typography variant="body1">{post.description}</Typography>
       </section>
     </article>
   );
