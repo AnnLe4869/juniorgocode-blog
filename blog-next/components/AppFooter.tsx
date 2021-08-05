@@ -6,6 +6,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
     padding: theme.spacing(2),
     backgroundColor: "#000",
+    [theme.breakpoints.down("md")]: {
+      paddingLeft: theme.spacing(1),
+    },
   },
   externalLink: {
     color: "#fafafa",
