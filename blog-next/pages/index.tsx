@@ -1,6 +1,6 @@
 import { Container, makeStyles } from "@material-ui/core";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import Link from "next/link";
+import Head from "next/head";
 import CardItem from "../components/CardItem";
 import formatPostTime from "../helper/formatPostTime";
 import { Post } from "../types";
@@ -22,11 +22,16 @@ export default function Home(
   const classes = useStyles();
 
   return (
-    <Container className={classes.root}>
-      {/* Loop over the posts */}
-      {props.posts &&
-        props.posts.map((post) => <CardItem post={post} key={post.id} />)}
-    </Container>
+    <>
+      <Head>
+        <title>Junior go Code</title>
+      </Head>
+      <Container className={classes.root}>
+        {/* Loop over the posts */}
+        {props.posts &&
+          props.posts.map((post) => <CardItem post={post} key={post.id} />)}
+      </Container>
+    </>
   );
 }
 

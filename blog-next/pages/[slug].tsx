@@ -1,5 +1,6 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 import ReactMarkdown from "react-markdown";
@@ -10,8 +11,8 @@ import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; //
 import gfm from "remark-gfm";
 import formatPostTime from "../helper/formatPostTime";
 /**
- * Need to use CSS file style since we Material-UI useStyles that can only be used in a component
- * And we the `components` that has in itself React component
+ * Need to use style from CSS file since we Material-UI useStyles that can only be used in a component
+ * Markdown parsed from ReactMarkdown cannot utilize style from Material-UI
  */
 import styles from "../styles/DetailPost.module.css";
 import { Post } from "../types";
@@ -116,37 +117,42 @@ export default function DetailedPost(
   const classes = useStyles();
 
   return (
-    <Container className={classes.root}>
-      {/* This is the title */}
-      <Typography component="h1" variant="h1" className={classes.title}>
-        {props.post.title}
-      </Typography>
+    <>
+      <Head>
+        <title>{props.post.title}</title>
+      </Head>
+      <Container className={classes.root}>
+        {/* This is the title */}
+        <Typography component="h1" variant="h1" className={classes.title}>
+          {props.post.title}
+        </Typography>
 
-      {/* This is the day the post is written */}
-      <Typography
-        variant="subtitle1"
-        color="textSecondary"
-        className={classes.subtitle}
-      >
-        {props.post.created_at}
-      </Typography>
+        {/* This is the day the post is written */}
+        <Typography
+          variant="subtitle1"
+          color="textSecondary"
+          className={classes.subtitle}
+        >
+          {props.post.created_at}
+        </Typography>
 
-      {/* This is the cover image where we use external style from CSS file */}
-      {props.post.imageCover.url && (
-        <div className={styles.imageContainer}>
-          <Image
-            src={`http://localhost:1337${props.post.imageCover.url}`}
-            alt={props.post.title}
-            layout="fill"
-          />
-        </div>
-      )}
+        {/* This is the cover image where we use external style from CSS file */}
+        {props.post.imageCover.url && (
+          <div className={styles.imageContainer}>
+            <Image
+              src={`http://localhost:1337${props.post.imageCover.url}`}
+              alt={props.post.title}
+              layout="fill"
+            />
+          </div>
+        )}
 
-      {/* This is the actual content we parse from markdown using ReactMarkdown with gfm plugin */}
-      <ReactMarkdown components={components} remarkPlugins={[gfm]}>
-        {props.post.content}
-      </ReactMarkdown>
-    </Container>
+        {/* This is the actual content we parse from markdown using ReactMarkdown with gfm plugin */}
+        <ReactMarkdown components={components} remarkPlugins={[gfm]}>
+          {props.post.content}
+        </ReactMarkdown>
+      </Container>
+    </>
   );
 }
 
