@@ -19,6 +19,15 @@ export default class MyDocument extends Document {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
+
+          <meta
+            name="keywords"
+            content="programming, junior, web development, javascript"
+          />
+
+          <link rel="icon" href="/favicon/favicon.ico" />
+
+          <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
         </Head>
         <body>
           <Main />
