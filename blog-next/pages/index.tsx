@@ -29,6 +29,23 @@ export default function Home(
           name="description"
           content="Junior Go Code. Blogs for developers"
         />
+
+        <meta property="og:url" content="/" />
+        <meta property="og:title" content="Junior go Code" />
+        <meta property="og:image" content="/cover.png" />
+        <meta
+          property="og:description"
+          content="Junior Go Code. Blogs for developers"
+        />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content="@jrgocode" />
+        <meta name="twitter:title" content="Junior go Code" />
+        <meta property="twitter:image" content="/cover.png" />
+        <meta
+          name="twitter:description"
+          content="Junior Go Code. Blogs for developers"
+        />
       </Head>
       <Container className={classes.root}>
         {/* Loop over the posts */}
