@@ -25,6 +25,10 @@ export default function Home(
     <>
       <Head>
         <title>Junior go Code</title>
+        <meta
+          name="description"
+          content="Junior Go Code. Blogs for developers"
+        />
       </Head>
       <Container className={classes.root}>
         {/* Loop over the posts */}

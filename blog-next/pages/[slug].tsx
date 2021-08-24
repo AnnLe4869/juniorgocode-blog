@@ -140,6 +140,7 @@ export default function DetailedPost(
     <>
       <Head>
         <title>{props.post.title}</title>
+        <meta name="description" content={props.post.description} />
       </Head>
       <Container className={classes.root}>
         {/* This is the title */}
