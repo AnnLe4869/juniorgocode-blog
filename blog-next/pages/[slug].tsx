@@ -107,7 +107,27 @@ const components = {
       );
     }
 
-    return <p>{paragraph.children}</p>;
+    return (
+      <Typography variant="body1" gutterBottom>
+        {paragraph.children}
+      </Typography>
+    );
+  },
+
+  /**
+   * Override the style from global.css
+   */
+  a(props: any) {
+    return (
+      <a
+        {...props}
+        style={{ color: "#3f51b5", textDecoration: "underline" }}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {props.children}
+      </a>
+    );
   },
 };
 
@@ -137,7 +157,7 @@ export default function DetailedPost(
         </Typography>
 
         {/* This is the cover image where we use external style from CSS file */}
-        {props.post.imageCover.url && (
+        {props.post.imageCover && (
           <div className={styles.imageContainer}>
             <Image
               src={`http://localhost:1337${props.post.imageCover.url}`}
