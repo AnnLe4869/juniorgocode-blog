@@ -144,13 +144,19 @@ export default function DetailedPost(
 
         <meta property="og:url" content={`/${props.post.slug}`} />
         <meta property="og:title" content={props.post.title} />
-        <meta property="og:image" content="/cover.png" />
+        <meta
+          property="og:image"
+          content="https://juniorgocode.com/cover.png"
+        />
         <meta property="og:description" content={props.post.description} />
 
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content="@jrgocode" />
         <meta name="twitter:title" content={props.post.title} />
-        <meta property="twitter:image" content="/cover.png" />
+        <meta
+          property="twitter:image"
+          content="https://juniorgocode.com/cover.png"
+        />
         <meta name="twitter:description" content={props.post.description} />
       </Head>
       <Container className={classes.root}>
