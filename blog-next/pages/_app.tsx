@@ -1,6 +1,7 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
+import Head from "next/head";
 import AppHeader from "../components/AppHeader";
 import AppFooter from "../components/AppFooter";
 import "../styles/globals.css";
@@ -20,6 +21,23 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <CssBaseline />
+
+      <Head>
+        <meta charSet="utf-8" />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta
+          name="keywords"
+          content="programming, junior, web development, javascript"
+        />
+
+        <link rel="icon" href="/favicon/favicon.ico" />
+
+        <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
+      </Head>
       <AppHeader />
       <Component {...pageProps} />
       <AppFooter />

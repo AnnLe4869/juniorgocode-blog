@@ -23,18 +23,6 @@
     "slug": {
       "type": "string"
     },
-    "imageCover": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
     "description": {
       "type": "text",
       "required": true

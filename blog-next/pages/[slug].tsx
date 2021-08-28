@@ -17,6 +17,8 @@ import formatPostTime from "../helper/formatPostTime";
 import styles from "../styles/DetailPost.module.css";
 import { Post } from "../types";
 
+import slugify from "slugify";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -129,6 +131,61 @@ const components = {
       </a>
     );
   },
+
+  /**
+   * Add id attribute to header and make it a "link"
+   * So that we can easily navigate to a section via header id
+   */
+
+  h2(props: any) {
+    return (
+      <h2 {...props} id={slugify(props.children[0], { lower: true })}>
+        <a href={`#${slugify(props.children[0], { lower: true })}`}>
+          {props.children}
+        </a>
+      </h2>
+    );
+  },
+
+  h3(props: any) {
+    return (
+      <h3 {...props} id={slugify(props.children[0], { lower: true })}>
+        <a href={`#${slugify(props.children[0], { lower: true })}`}>
+          {props.children}
+        </a>
+      </h3>
+    );
+  },
+
+  h4(props: any) {
+    return (
+      <h4 {...props} id={slugify(props.children[0], { lower: true })}>
+        <a href={`#${slugify(props.children[0], { lower: true })}`}>
+          {props.children}
+        </a>
+      </h4>
+    );
+  },
+
+  h5(props: any) {
+    return (
+      <h5 {...props} id={slugify(props.children[0], { lower: true })}>
+        <a href={`#${slugify(props.children[0], { lower: true })}`}>
+          {props.children}
+        </a>
+      </h5>
+    );
+  },
+
+  h6(props: any) {
+    return (
+      <h6 {...props} id={slugify(props.children[0], { lower: true })}>
+        <a href={`#${slugify(props.children[0], { lower: true })}`}>
+          {props.children}
+        </a>
+      </h6>
+    );
+  },
 };
 
 export default function DetailedPost(
@@ -173,17 +230,6 @@ export default function DetailedPost(
         >
           {props.post.created_at}
         </Typography>
-
-        {/* This is the cover image where we use external style from CSS file */}
-        {props.post.imageCover && (
-          <div className={styles.imageContainer}>
-            <Image
-              src={`http://localhost:1337${props.post.imageCover.url}`}
-              alt={props.post.title}
-              layout="fill"
-            />
-          </div>
-        )}
 
         {/* This is the actual content we parse from markdown using ReactMarkdown with gfm plugin */}
         <ReactMarkdown components={components} remarkPlugins={[gfm]}>
