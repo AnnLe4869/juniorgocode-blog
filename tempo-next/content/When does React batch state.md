@@ -1,5 +1,13 @@
 # When does React batch state
 
+---
+
+Title: When does React batch state
+Date: 12/08/2021
+Description: If you use React Hooks before, you are probably familiar with using `setState` with single value. But do you know it has a functional form?
+
+---
+
 **NOTE**: At the time of writing, React 18 hasn't been released and [in the React 18 brief](https://reactjs.org/blog/2021/06/08/the-plan-for-react-18.html) the behavior of state batching will change for the better. For more information about React 18 change, read [this GitHub discussion](https://github.com/reactwg/react-18/discussions/4) This article will cover the state batching of React version 17 and older.
 
 ## Terms

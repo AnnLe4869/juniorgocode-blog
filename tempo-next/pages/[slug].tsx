@@ -241,20 +241,22 @@ export default function DetailedPost(
 }
 
 // For each individual page: Get detail data for each page
-export const getStaticProps: GetStaticProps<{ post: Post }, { slug: string }> =
-  async (context) => {
-    const { params } = context;
+export const getStaticProps: GetStaticProps<
+  { post: Post },
+  { slug: Post["slug"] }
+> = async (context) => {
+  const { params } = context;
 
-    if (!params) throw new Error("No parameter is provided to the function");
+  if (!params) throw new Error("No parameter is provided to the function");
 
-    // This return an array of all data that match the query and we only want the first one
-    const res = await fetch(`http://localhost:1337/posts?slug=${params.slug}`);
-    const post: Post = (await res.json())[0];
+  // This return an array of all data that match the query and we only want the first one
+  const res = await fetch(`http://localhost:1337/posts?slug=${params.slug}`);
+  const post: Post = (await res.json())[0];
 
-    return {
-      props: { post: formatPostTime(post) },
-    };
+  return {
+    props: { post: formatPostTime(post) },
   };
+};
 
 // Tell NextJS How many pages are there
 export const getStaticPaths: GetStaticPaths = async () => {

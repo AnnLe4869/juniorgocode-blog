@@ -2,8 +2,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import Head from "next/head";
-import AppHeader from "../components/AppHeader";
-import AppFooter from "../components/AppFooter";
+import AppHeader from "../layout/AppHeader";
+import AppFooter from "../layout/AppFooter";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
