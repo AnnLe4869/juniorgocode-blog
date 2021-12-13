@@ -1,4 +1,4 @@
-export default function getTitle(text: string) {
+export default function extractTitle(text: string) {
   const re = /Title: (.*)\r\n/;
 
   const results = text.match(re);

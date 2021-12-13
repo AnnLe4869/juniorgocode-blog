@@ -19,6 +19,13 @@ import { Post } from "../types";
 
 import slugify from "slugify";
 
+import { readdir, readFile } from "fs/promises";
+import path from "path";
+import extractContent from "../helper/extractContent";
+import extractDescription from "../helper/extractDescription";
+import extractTitle from "../helper/extractTitle";
+import extractDate from "../helper/extractDate";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -228,7 +235,7 @@ export default function DetailedPost(
           color="textSecondary"
           className={classes.subtitle}
         >
-          {props.post.created_at}
+          {props.post.date}
         </Typography>
 
         {/* This is the actual content we parse from markdown using ReactMarkdown with gfm plugin */}
@@ -250,8 +257,20 @@ export const getStaticProps: GetStaticProps<
   if (!params) throw new Error("No parameter is provided to the function");
 
   // This return an array of all data that match the query and we only want the first one
-  const res = await fetch(`http://localhost:1337/posts?slug=${params.slug}`);
-  const post: Post = (await res.json())[0];
+
+  const file = await readFile(
+    path.join(process.cwd(), `content/${params.slug}/index.md`),
+    "ascii"
+  );
+
+  const post: Post = {
+    id: file,
+    title: extractTitle(file),
+    date: extractDate(file),
+    description: extractDescription(file),
+    content: extractContent(file),
+    slug: file,
+  };
 
   return {
     props: { post: formatPostTime(post) },
@@ -260,9 +279,26 @@ export const getStaticProps: GetStaticProps<
 
 // Tell NextJS How many pages are there
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await fetch(`http://localhost:1337/posts`);
+  const posts: Post[] = [];
 
-  const posts: Post[] = await res.json();
+  const subDirectories = await readdir(path.join(process.cwd(), "content"));
+
+  for (const subDirectoryName of subDirectories) {
+    const file = await readFile(
+      path.join(process.cwd(), `content/${subDirectoryName}/index.md`),
+      "ascii"
+    );
+
+    const post: Post = {
+      id: subDirectoryName,
+      title: extractTitle(file),
+      date: extractDate(file),
+      description: extractDescription(file),
+      content: extractContent(file),
+      slug: subDirectoryName,
+    };
+    posts.push(post);
+  }
 
   const paths = posts.map((post) => ({ params: { slug: post.slug } }));
 

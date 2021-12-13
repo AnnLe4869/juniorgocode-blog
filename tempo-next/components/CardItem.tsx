@@ -36,7 +36,7 @@ export default function CardItem({ post }: { post: Post }) {
         </Typography>
 
         <Typography variant="subtitle1" color="textSecondary">
-          {post.created_at}
+          {post.date}
         </Typography>
       </header>
 

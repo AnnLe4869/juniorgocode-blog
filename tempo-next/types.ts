@@ -1,7 +1,6 @@
 type DefaultType = {
   id: string;
-  created_at: string;
-  updated_at: string;
+  date: string;
 };
 
 export type User = Record<"username" | "email", string> & DefaultType;
