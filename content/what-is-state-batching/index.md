@@ -3,7 +3,7 @@
 ---
 
 Title: What is state batching
-Date: 12/08/2021
+Date: 11/08/2021
 Description: If you use React Hooks before, you are probably familiar with using `setState` with single value. But do you know it has a functional form?
 
 ---

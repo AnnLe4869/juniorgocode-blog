@@ -1,17 +1,15 @@
 import { Container, makeStyles } from "@material-ui/core";
+import { readdir, readFile } from "fs/promises";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
+import path from "path";
 import CardItem from "../components/CardItem";
+import extractContent from "../helper/extractContent";
+import extractDate from "../helper/extractDate";
+import extractDescription from "../helper/extractDescription";
+import extractTitle from "../helper/extractTitle";
 import formatPostTime from "../helper/formatPostTime";
 import { Post } from "../types";
-
-import { readdir, readFile } from "fs/promises";
-import path from "path";
-import extractTitle from "../helper/extractTitle";
-import extractDate from "../helper/extractDate";
-import extractContent from "../helper/extractContent";
-import formatDateString from "../helper/formatDateString";
-import extractDescription from "../helper/extractDescription";
 
 const useStyles = makeStyles(() => ({
   root: {

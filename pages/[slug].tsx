@@ -1,7 +1,9 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
+import { readdir, readFile } from "fs/promises";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import path from "path";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -9,6 +11,10 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // @ts-ignore
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; // !Error here due to bugs in TS file in @types/react-highlight
 import gfm from "remark-gfm";
+import extractContent from "../helper/extractContent";
+import extractDate from "../helper/extractDate";
+import extractDescription from "../helper/extractDescription";
+import extractTitle from "../helper/extractTitle";
 import formatPostTime from "../helper/formatPostTime";
 /**
  * Need to use style from CSS file since we Material-UI useStyles that can only be used in a component
@@ -16,15 +22,6 @@ import formatPostTime from "../helper/formatPostTime";
  */
 import styles from "../styles/DetailPost.module.css";
 import { Post } from "../types";
-
-import slugify from "slugify";
-
-import { readdir, readFile } from "fs/promises";
-import path from "path";
-import extractContent from "../helper/extractContent";
-import extractDescription from "../helper/extractDescription";
-import extractTitle from "../helper/extractTitle";
-import extractDate from "../helper/extractDate";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -146,50 +143,40 @@ const components = {
 
   h2(props: any) {
     return (
-      <h2 {...props} id={slugify(props.children[0], { lower: true })}>
-        <a href={`#${slugify(props.children[0], { lower: true })}`}>
-          {props.children}
-        </a>
+      <h2 {...props} id={props.children[0]}>
+        <a href={`#${props.children[0]}`}>{props.children}</a>
       </h2>
     );
   },
 
   h3(props: any) {
     return (
-      <h3 {...props} id={slugify(props.children[0], { lower: true })}>
-        <a href={`#${slugify(props.children[0], { lower: true })}`}>
-          {props.children}
-        </a>
+      <h3 {...props} id={props.children[0]}>
+        <a href={`#${props.children[0]}`}>{props.children}</a>
       </h3>
     );
   },
 
   h4(props: any) {
     return (
-      <h4 {...props} id={slugify(props.children[0], { lower: true })}>
-        <a href={`#${slugify(props.children[0], { lower: true })}`}>
-          {props.children}
-        </a>
+      <h4 {...props} id={props.children[0]}>
+        <a href={`#${props.children[0]}`}>{props.children}</a>
       </h4>
     );
   },
 
   h5(props: any) {
     return (
-      <h5 {...props} id={slugify(props.children[0], { lower: true })}>
-        <a href={`#${slugify(props.children[0], { lower: true })}`}>
-          {props.children}
-        </a>
+      <h5 {...props} id={props.children[0]}>
+        <a href={`#${props.children[0]}`}>{props.children}</a>
       </h5>
     );
   },
 
   h6(props: any) {
     return (
-      <h6 {...props} id={slugify(props.children[0], { lower: true })}>
-        <a href={`#${slugify(props.children[0], { lower: true })}`}>
-          {props.children}
-        </a>
+      <h6 {...props} id={props.children[0]}>
+        <a href={`#${props.children[0]}`}>{props.children}</a>
       </h6>
     );
   },

@@ -3,7 +3,7 @@
 ---
 
 Title: What is functional form of setState
-Date: 12/08/2021
+Date: 12/05/2021
 Description: If you use React Hooks before, you are probably familiar with using `setState` with single value. But do you know it has a functional form?
 
 ---
