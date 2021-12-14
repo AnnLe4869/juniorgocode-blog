@@ -32,7 +32,7 @@ export default function AppFooter() {
        * Link: https://www.freecodecamp.org/news/how-to-use-html-to-open-link-in-new-tab/
        */}
       <a
-        href="https://twitter.com/jrgocode"
+        href="https://twitter.com/juniorgocode"
         className={classes.externalLink}
         target="_blank"
         rel="noopener noreferrer"

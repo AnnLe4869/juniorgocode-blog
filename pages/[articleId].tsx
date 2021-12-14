@@ -203,7 +203,7 @@ export default function DetailedPost(
         <meta property="og:description" content={props.post.description} />
 
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:creator" content="@jrgocode" />
+        <meta name="twitter:creator" content="@juniorgocode" />
         <meta name="twitter:title" content={props.post.title} />
         <meta
           property="twitter:image"

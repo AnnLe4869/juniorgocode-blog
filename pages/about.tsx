@@ -41,11 +41,17 @@ export default function About() {
         online, and thus, there are, inevitably, errors and misinformation in
         some articles. If you think something is incorrect or should be adjusted
         or should be changed for better, please let me know by{" "}
-        <a href="mailto:jrgocode@gmail.com" className={classes.externalLink}>
+        <a
+          href="mailto:juniorgocode@gmail.com"
+          className={classes.externalLink}
+        >
           sending me an email
         </a>{" "}
         or{" "}
-        <a href="https://twitter.com/jrgocode" className={classes.externalLink}>
+        <a
+          href="https://twitter.com/juniorgocode"
+          className={classes.externalLink}
+        >
           DM me via Twitter
         </a>
         . I am happy to receive any feedbacks.
@@ -63,7 +69,10 @@ export default function About() {
       </Typography>
 
       <Typography component="p" variant="h6" paragraph>
-        <a href="https://twitter.com/jrgocode" className={classes.externalLink}>
+        <a
+          href="https://twitter.com/juniorgocode"
+          className={classes.externalLink}
+        >
           Follow me on Twitter
         </a>
       </Typography>

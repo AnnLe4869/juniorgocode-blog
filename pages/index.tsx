@@ -47,7 +47,7 @@ export default function Home(
         />
 
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:creator" content="@jrgocode" />
+        <meta name="twitter:creator" content="@juniorgocode" />
         <meta name="twitter:title" content="Junior go Code" />
         <meta
           property="twitter:image"
