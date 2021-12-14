@@ -4,9 +4,8 @@ export default async function getFileContentFromFileDirectory(file: string) {
   try {
     await access(path.join(process.cwd(), file));
   } catch (err) {
-    console.error(err);
     throw new Error(
-      "The file cannot be found. Maybe the filename provided doesn't exist or you don't have permission to read the file"
+      "The file cannot be found. Maybe the file doesn't exist or you don't have permission to read the file"
     );
   }
 

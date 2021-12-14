@@ -15,6 +15,7 @@ import extractContentFromText from "../helper/extractContentFromText";
 import extractDateFromText from "../helper/extractDateFromText";
 import extractDescriptionFromText from "../helper/extractDescriptionFromText";
 import extractTitleFromText from "../helper/extractTitleFromText";
+import getAllContentNameFromDirectory from "../helper/getAllContentNameFromDirectory";
 import getFileContentFromFileDirectory from "../helper/getFileContentFromFileDirectory";
 /**
  * Need to use style from CSS file since we Material-UI useStyles that can only be used in a component
@@ -248,7 +249,6 @@ export const getStaticProps: GetStaticProps<
   const fileContent = await getFileContentFromFileDirectory(
     `content/${params.articleId}/index.md`
   );
-
   const post: Post = {
     id: params.articleId,
     title: extractTitleFromText(fileContent),
@@ -266,20 +266,20 @@ export const getStaticProps: GetStaticProps<
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts: Post[] = [];
 
-  const subDirectories = await readdir(path.join(process.cwd(), "content"));
+  const subDirectories = await getAllContentNameFromDirectory("content");
 
   for (const subDirectoryName of subDirectories) {
-    const file = await readFile(
-      path.join(process.cwd(), `content/${subDirectoryName}/index.md`),
-      "ascii"
+    // The subdirectory'name is the article name and the actual article is the index.md file inside
+    const fileContent = await getFileContentFromFileDirectory(
+      `content/${subDirectoryName}/index.md`
     );
 
     const post: Post = {
       id: subDirectoryName,
-      title: extractTitleFromText(file),
-      date: extractDateFromText(file),
-      description: extractDescriptionFromText(file),
-      content: extractContentFromText(file),
+      title: extractTitleFromText(fileContent),
+      date: extractDateFromText(fileContent),
+      description: extractDescriptionFromText(fileContent),
+      content: extractContentFromText(fileContent),
     };
     posts.push(post);
   }

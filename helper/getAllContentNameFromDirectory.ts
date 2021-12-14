@@ -11,9 +11,8 @@ export default async function getAllContentNameFromDirectory(
   try {
     await access(path.join(process.cwd(), directory));
   } catch (err) {
-    console.error(err);
     throw new Error(
-      "The directory cannot be found. Maybe the name directory's name provided doesn't exist or you don't have permission to read the file"
+      "The directory cannot be found. Maybe the directory doesn't exist or you don't have permission to read the directory"
     );
   }
 
@@ -22,6 +21,10 @@ export default async function getAllContentNameFromDirectory(
     throw new Error(
       "There is no content inside the directory. Maybe the directory name is incorrect"
     );
+  }
+
+  if (new Set(subContents).size !== subContents.length) {
+    throw new Error("There are two elements with same name in the directory");
   }
 
   return subContents;

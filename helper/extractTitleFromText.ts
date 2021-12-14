@@ -1,12 +1,13 @@
-import { Post } from "../types";
+export default function extractTitleFromText(text: string) {
+  // The title is the line that start with Title
+  const regexExpression = /Title: (.*)\r\n/;
 
-export default function extractTitleFromText(text: Post["content"]) {
-  const re = /Title: (.*)\r\n/;
+  const results = text.match(regexExpression);
 
-  const results = text.match(re);
-
-  if (!results || results.length < 1) {
-    throw new Error("The file need to have a title in the file content");
+  if (!results || results.length < 2) {
+    throw new Error(
+      "The text doesn't have title field or is not formatted correctly"
+    );
   }
 
   return results[1];

@@ -2,7 +2,7 @@ const formatDateString = (dateString: string) => {
   const date = new Date(dateString);
 
   if (date.toLocaleDateString() === "Invalid Date")
-    throw new Error("Your date string is invalid");
+    throw new Error("Your provided date string is invalid");
 
   return date.toLocaleDateString(undefined, {
     year: "numeric",

@@ -1,13 +1,15 @@
-import { Post } from "../types";
 import formatDateString from "./formatDateString";
 
-export default function extractDateFromText(text: Post["content"]) {
-  const re = /Date: (.*)\r\n/;
+export default function extractDateFromText(text: string) {
+  // The date is the line that start with Date
+  const regexExpression = /Date: (.*)\r\n/;
 
-  const results = text.match(re);
+  const results = text.match(regexExpression);
 
-  if (!results || results.length < 1) {
-    throw new Error("The file need to have a date in the file content");
+  if (!results || results.length < 2) {
+    throw new Error(
+      "The text doesn't have any date field or is not formatted correctly"
+    );
   }
 
   return formatDateString(results[1]);

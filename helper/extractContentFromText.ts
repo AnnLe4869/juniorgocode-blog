@@ -1,12 +1,13 @@
-import { Post } from "../types";
+export default function extractContentFromText(text: string) {
+  // The content start with the first line that starts with ## and last till the end of file
+  const regexExpression = /(## [\w\W]*)/;
 
-export default function extractContentFromText(text: Post["content"]) {
-  const re = /(## [\w\W]*)/;
+  const results = text.match(regexExpression);
 
-  const results = text.match(re);
-
-  if (!results || results.length < 1) {
-    throw new Error("The file need to have content in the file content");
+  if (!results || results.length < 2) {
+    throw new Error(
+      "The text either doesn't have any content field or is not formatted correctly"
+    );
   }
 
   return results[1];
