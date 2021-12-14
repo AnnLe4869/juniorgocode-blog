@@ -1,4 +1,6 @@
-export default function extractContent(text: string) {
+import { Post } from "../types";
+
+export default function extractContentFromText(text: Post["content"]) {
   const re = /(## [\w\W]*)/;
 
   const results = text.match(re);

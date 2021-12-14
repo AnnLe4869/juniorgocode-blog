@@ -1,14 +1,13 @@
 import { Container, makeStyles } from "@material-ui/core";
-import { readdir, readFile } from "fs/promises";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import path from "path";
 import CardItem from "../components/CardItem";
-import extractContent from "../helper/extractContent";
-import extractDate from "../helper/extractDate";
-import extractDescription from "../helper/extractDescription";
-import extractTitle from "../helper/extractTitle";
-import formatPostTime from "../helper/formatPostTime";
+import extractContentFromText from "../helper/extractContentFromText";
+import extractDateFromText from "../helper/extractDateFromText";
+import extractDescriptionFromText from "../helper/extractDescriptionFromText";
+import extractTitleFromText from "../helper/extractTitleFromText";
+import getAllContentNameFromDirectory from "../helper/getAllContentNameFromDirectory";
+import getFileContentFromFileDirectory from "../helper/getFileContentFromFileDirectory";
 import { Post } from "../types";
 
 const useStyles = makeStyles(() => ({
@@ -72,20 +71,20 @@ export const getStaticProps: GetStaticProps<{ posts: Post[] }> = async () => {
   // Get post from our Strapi API and sort by updated date
   const posts: Post[] = [];
 
-  const subDirectories = await readdir(path.join(process.cwd(), "content"));
+  const subDirectories = await getAllContentNameFromDirectory("content");
 
   for (const subDirectoryName of subDirectories) {
-    const file = await readFile(
-      path.join(process.cwd(), `content/${subDirectoryName}/index.md`),
-      "ascii"
+    // The subdirectory'name is the article name and the actual article is the index.md file inside
+    const fileContent = await getFileContentFromFileDirectory(
+      `content/${subDirectoryName}/index.md`
     );
 
     const post: Post = {
       id: subDirectoryName,
-      title: extractTitle(file),
-      date: extractDate(file),
-      description: extractDescription(file),
-      content: extractContent(file),
+      title: extractTitleFromText(fileContent),
+      date: extractDateFromText(fileContent),
+      description: extractDescriptionFromText(fileContent),
+      content: extractContentFromText(fileContent),
       slug: subDirectoryName,
     };
     posts.push(post);
@@ -93,9 +92,7 @@ export const getStaticProps: GetStaticProps<{ posts: Post[] }> = async () => {
 
   return {
     props: {
-      posts: posts
-        .map((post) => formatPostTime(post))
-        .sort((a, b) => (a.date > b.date ? 10000 : -10000)),
+      posts: posts.sort((a, b) => (a.date > b.date ? 10000 : -10000)),
     },
   };
 };

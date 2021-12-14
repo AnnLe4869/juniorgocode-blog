@@ -11,11 +11,12 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // @ts-ignore
 import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism"; // !Error here due to bugs in TS file in @types/react-highlight
 import gfm from "remark-gfm";
-import extractContent from "../helper/extractContent";
-import extractDate from "../helper/extractDate";
-import extractDescription from "../helper/extractDescription";
-import extractTitle from "../helper/extractTitle";
+import extractContentFromText from "../helper/extractContentFromText";
+import extractDateFromText from "../helper/extractDateFromText";
+import extractDescriptionFromText from "../helper/extractDescriptionFromText";
+import extractTitleFromText from "../helper/extractTitleFromText";
 import formatPostTime from "../helper/formatPostTime";
+import getFileContentFromFileDirectory from "../helper/getFileContentFromFileDirectory";
 /**
  * Need to use style from CSS file since we Material-UI useStyles that can only be used in a component
  * Markdown parsed from ReactMarkdown cannot utilize style from Material-UI
@@ -245,22 +246,21 @@ export const getStaticProps: GetStaticProps<
 
   // This return an array of all data that match the query and we only want the first one
 
-  const file = await readFile(
-    path.join(process.cwd(), `content/${params.slug}/index.md`),
-    "ascii"
+  const fileContent = await getFileContentFromFileDirectory(
+    `content/${params.slug}/index.md`
   );
 
   const post: Post = {
-    id: file,
-    title: extractTitle(file),
-    date: extractDate(file),
-    description: extractDescription(file),
-    content: extractContent(file),
-    slug: file,
+    id: fileContent,
+    title: extractTitleFromText(fileContent),
+    date: extractDateFromText(fileContent),
+    description: extractDescriptionFromText(fileContent),
+    content: extractContentFromText(fileContent),
+    slug: fileContent,
   };
 
   return {
-    props: { post: formatPostTime(post) },
+    props: { post },
   };
 };
 
@@ -278,10 +278,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     const post: Post = {
       id: subDirectoryName,
-      title: extractTitle(file),
-      date: extractDate(file),
-      description: extractDescription(file),
-      content: extractContent(file),
+      title: extractTitleFromText(file),
+      date: extractDateFromText(file),
+      description: extractDescriptionFromText(file),
+      content: extractContentFromText(file),
       slug: subDirectoryName,
     };
     posts.push(post);

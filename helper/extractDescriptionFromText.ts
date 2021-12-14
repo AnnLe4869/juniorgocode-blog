@@ -1,4 +1,6 @@
-export default function extractDescription(text: string) {
+import { Post } from "../types";
+
+export default function extractDescriptionFromText(text: Post["content"]) {
   const re = /Description: (.*)\r\n/;
 
   const results = text.match(re);

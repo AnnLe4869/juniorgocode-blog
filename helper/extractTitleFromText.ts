@@ -1,4 +1,6 @@
-export default function extractTitle(text: string) {
+import { Post } from "../types";
+
+export default function extractTitleFromText(text: Post["content"]) {
   const re = /Title: (.*)\r\n/;
 
   const results = text.match(re);
