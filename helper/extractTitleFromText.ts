@@ -1,6 +1,6 @@
 export default function extractTitleFromText(text: string) {
   // The title is the line that start with Title
-  const regexExpression = /Title: (.*)\r\n/;
+  const regexExpression = /Title: (.*)(\W)*\n/;
 
   const results = text.match(regexExpression);
 

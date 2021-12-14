@@ -1,6 +1,6 @@
 export default function extractDescriptionFromText(text: string) {
   // The description is the line that start with Description
-  const regexExpression = /Description: (.*)\r\n/;
+  const regexExpression = /Description: (.*)(\W)*\n/;
 
   const results = text.match(regexExpression);
 

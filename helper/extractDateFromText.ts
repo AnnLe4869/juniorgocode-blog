@@ -2,7 +2,7 @@ import formatDateString from "./formatDateString";
 
 export default function extractDateFromText(text: string) {
   // The date is the line that start with Date
-  const regexExpression = /Date: (.*)\r\n/;
+  const regexExpression = /Date: (.*)(\W)*\n/;
 
   const results = text.match(regexExpression);
 
