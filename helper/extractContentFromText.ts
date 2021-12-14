@@ -5,6 +5,8 @@ export default function extractContentFromText(text: string) {
   const results = text.match(regexExpression);
 
   if (!results || results.length < 2) {
+    console.log(results);
+
     throw new Error(
       "The text either doesn't have any content field or is not formatted correctly" +
         text
