@@ -7,11 +7,8 @@ export default function extractDateFromText(text: string) {
   const results = text.match(regexExpression);
 
   if (!results || results.length < 2) {
-    console.log(results);
-
     throw new Error(
-      "The text doesn't have any date field or is not formatted correctly" +
-        text
+      "The text doesn't have any date field or is not formatted correctly"
     );
   }
 
