@@ -15,5 +15,7 @@ export default async function getFileContentFromFileDirectory(file: string) {
     throw new Error("The file is empty. Should be something there");
   }
 
+  console.log(fileContent);
+
   return fileContent;
 }

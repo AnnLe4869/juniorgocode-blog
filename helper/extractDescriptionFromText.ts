@@ -6,7 +6,8 @@ export default function extractDescriptionFromText(text: string) {
 
   if (!results || results.length < 2) {
     throw new Error(
-      "The text doesn't have description field or is not formatted correctly"
+      "The text doesn't have description field or is not formatted correctly" +
+        text
     );
   }
 

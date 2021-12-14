@@ -6,7 +6,7 @@ export default function extractTitleFromText(text: string) {
 
   if (!results || results.length < 2) {
     throw new Error(
-      "The text doesn't have title field or is not formatted correctly"
+      "The text doesn't have title field or is not formatted correctly" + text
     );
   }
 

@@ -6,7 +6,8 @@ export default function extractContentFromText(text: string) {
 
   if (!results || results.length < 2) {
     throw new Error(
-      "The text either doesn't have any content field or is not formatted correctly"
+      "The text either doesn't have any content field or is not formatted correctly" +
+        text
     );
   }
 

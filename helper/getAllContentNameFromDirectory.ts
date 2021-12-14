@@ -27,5 +27,7 @@ export default async function getAllContentNameFromDirectory(
     throw new Error("There are two elements with same name in the directory");
   }
 
+  console.log(subContents);
+
   return subContents;
 }

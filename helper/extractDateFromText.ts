@@ -8,7 +8,8 @@ export default function extractDateFromText(text: string) {
 
   if (!results || results.length < 2) {
     throw new Error(
-      "The text doesn't have any date field or is not formatted correctly"
+      "The text doesn't have any date field or is not formatted correctly" +
+        text
     );
   }
 
