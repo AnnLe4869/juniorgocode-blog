@@ -85,7 +85,6 @@ export const getStaticProps: GetStaticProps<{ posts: Post[] }> = async () => {
       date: extractDateFromText(fileContent),
       description: extractDescriptionFromText(fileContent),
       content: extractContentFromText(fileContent),
-      slug: subDirectoryName,
     };
     posts.push(post);
   }

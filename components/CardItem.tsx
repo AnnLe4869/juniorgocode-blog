@@ -32,7 +32,7 @@ export default function CardItem({ post }: { post: Post }) {
     <article className={classes.root}>
       <header className={classes.articleHeader}>
         <Typography variant="h5" className={classes.title}>
-          <Link href={`/${post.slug}`}>{post.title}</Link>
+          <Link href={`/${post.id}`}>{post.title}</Link>
         </Typography>
 
         <Typography variant="subtitle1" color="textSecondary">

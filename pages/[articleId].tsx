@@ -15,7 +15,6 @@ import extractContentFromText from "../helper/extractContentFromText";
 import extractDateFromText from "../helper/extractDateFromText";
 import extractDescriptionFromText from "../helper/extractDescriptionFromText";
 import extractTitleFromText from "../helper/extractTitleFromText";
-import formatPostTime from "../helper/formatPostTime";
 import getFileContentFromFileDirectory from "../helper/getFileContentFromFileDirectory";
 /**
  * Need to use style from CSS file since we Material-UI useStyles that can only be used in a component
@@ -194,7 +193,7 @@ export default function DetailedPost(
         <title>{props.post.title}</title>
         <meta name="description" content={props.post.description} />
 
-        <meta property="og:url" content={`/${props.post.slug}`} />
+        <meta property="og:url" content={`/${props.post.id}`} />
         <meta property="og:title" content={props.post.title} />
         <meta
           property="og:image"
@@ -238,7 +237,7 @@ export default function DetailedPost(
 // For each individual page: Get detail data for each page
 export const getStaticProps: GetStaticProps<
   { post: Post },
-  { slug: Post["slug"] }
+  { articleId: Post["id"] }
 > = async (context) => {
   const { params } = context;
 
@@ -247,16 +246,15 @@ export const getStaticProps: GetStaticProps<
   // This return an array of all data that match the query and we only want the first one
 
   const fileContent = await getFileContentFromFileDirectory(
-    `content/${params.slug}/index.md`
+    `content/${params.articleId}/index.md`
   );
 
   const post: Post = {
-    id: fileContent,
+    id: params.articleId,
     title: extractTitleFromText(fileContent),
     date: extractDateFromText(fileContent),
     description: extractDescriptionFromText(fileContent),
     content: extractContentFromText(fileContent),
-    slug: fileContent,
   };
 
   return {
@@ -282,12 +280,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
       date: extractDateFromText(file),
       description: extractDescriptionFromText(file),
       content: extractContentFromText(file),
-      slug: subDirectoryName,
     };
     posts.push(post);
   }
 
-  const paths = posts.map((post) => ({ params: { slug: post.slug } }));
+  const paths = posts.map((post) => ({ params: { articleId: post.id } }));
 
   return {
     paths,
