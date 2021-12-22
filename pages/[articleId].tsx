@@ -115,7 +115,11 @@ const components = {
     }
 
     return (
-      <Typography variant="body1" gutterBottom>
+      <Typography
+        variant="body1"
+        gutterBottom
+        style={{ marginBottom: "1.5rem" }}
+      >
         {paragraph.children}
       </Typography>
     );
