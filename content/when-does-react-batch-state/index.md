@@ -4,7 +4,7 @@
 
 Title: When does React batch state
 Date: 12/25/2021
-Description: If you use React Hooks before, you are probably familiar with using `setState` with single value. But do you know it has a functional form?
+Description: We learned before that React states sometimes get batched together into one single state update instead of individual update. But some other times this is not the case.
 
 ---
 
@@ -51,11 +51,11 @@ const App = () => {
 };
 ```
 
-When we click on the button, the state variable `a` and `b` will be updated, but the component only re-render **ONE**. This is because React batches both state-update functions in `handleClick` into one "batch" and after React know for sure that there is no more state-update function it needs to run, then it execute those state-update functions.
+When we click on the button, the state variable `a` and `b` will be updated, but the component only re-render **ONE**. This is because React batches both state-update functions in `handleClick` into one "batch" and after React know for sure that there is no more state-update function it needs to run, it will execute those batched state-update functions.
 
----> This help us update the states all at once, which in turn re-render component only one. This is a good thing for performance.
+---> This help us update the states all at once, which in turn re-render component only one time. This is a good thing for performance.
 
-However, React doesn't always batch state. Several situations that can prevent this from happening. For example, if we do something asynchronous and then want to update state, chance is that React won't batch those states and instead, run each of them individually. Let take a look at one example where this happen:
+However, React doesn't always batch state. Several situations that can prevent this from happening. For example, if we do something asynchronous and then want to update state, chance is that React won't batch those states and instead, run each of them individually. Let take a look at one example
 
 ```tsx
 const App = () => {
@@ -81,7 +81,7 @@ const App = () => {
 };
 ```
 
-If we click on the button now, we see that the log message is printed twice, which indicate that the component has been re-render **TWICE**. This can be interpreted as that each of the state-update function has been executed individually.
+If we click on the button now, we see that the log message is printed twice, which indicates that the component has been re-rendered **TWICE**. This can be interpreted as that each of the state-update function has been executed individually.
 
 Here is what happen in order:
 

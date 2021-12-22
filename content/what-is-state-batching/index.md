@@ -3,8 +3,8 @@
 ---
 
 Title: What is state batching
-Date: 11/08/2021
-Description: If you use React Hooks before, you are probably familiar with using `setState` with single value. But do you know it has a functional form?
+Date: 12/16/2021
+Description: When multiple states are updated, chance is that they are not updated one by one. Instead, they are batched together and updated all at once
 
 ---
 
@@ -51,9 +51,9 @@ const App = () => {
 };
 ```
 
-Try to run the code above and click on the button. Can you guess how many time you will see the log message `State change`?
+Try to run the code above and click on the button. Can you guess how many time you will see the message `State change` in the console?
 
-The answer is **1 log message per button click**. When I first learn React I did the wrong guess, which is 2 log messages per button click. Our guess of 2 logs is wrong as we can easily test with the code above. But why is it? Let analyze why we came up with such and what actually happened.
+The answer is **1 log message per button click**. When I first learned React I did the wrong guess, which is 2 log messages per button click. Our guess of 2 logs is wrong. But why is it? Let analyze why we came up with such guess and what actually happened.
 
 ---
 
@@ -90,7 +90,7 @@ This is what state batching does: it combines multiple state-update functions in
 
 **But why do we need state batching?**
 
-As you can see in the example above, without state batching we need to run an additional re-render of component and an additional run of `useEffect` callback. This is worse if we have more state variables compared to our example. Batching save us time and resource.
+As you can see in the example above, without state batching we need to run an additional re-render of component and an additional run of `useEffect` callback. This can be worse if we have more state variables compared to our example. Batching saves us time and resource.
 
 ## Reference
 

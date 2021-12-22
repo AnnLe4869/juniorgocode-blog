@@ -91,7 +91,11 @@ export const getStaticProps: GetStaticProps<{ posts: Post[] }> = async () => {
 
   return {
     props: {
-      posts: posts.sort((a, b) => (a.date > b.date ? 10000 : -10000)),
+      posts: posts.sort(function (a, b) {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return Date.parse(b.date) - Date.parse(a.date);
+      }),
     },
   };
 };
