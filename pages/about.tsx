@@ -30,20 +30,31 @@ export default function About() {
       <Typography component="h1" variant="h1" className={classes.title}>
         About me
       </Typography>
-      <Typography component="p" variant="h6" paragraph>
-        Hello world! I am Anh, a software engineer and soon to be a third year
-        computer science student at University of California, San Diego. I start
-        this blog with the purpose of helping other people and through that
-        process also reinforce my learning.
+      <Typography
+        component="p"
+        variant="h6"
+        paragraph
+        style={{ marginBottom: "1.5rem" }}
+      >
+        Hello world! I am Anh, a computer science student at University of
+        California, San Diego. I started this blog with the purpose of helping
+        other people and through that process also reinforce my learning.
       </Typography>
-      <Typography component="p" variant="h6" paragraph>
+      <Typography
+        component="p"
+        variant="h6"
+        paragraph
+        style={{ marginBottom: "1.5rem" }}
+      >
         I write this blog using my own experience and information I found
         online, and thus, there are, inevitably, errors and misinformation in
-        some articles. If you think something is incorrect or should be adjusted
-        or should be changed for better, please let me know by{" "}
+        some articles. If you think something is incorrect or should be
+        adjusted, please let me know by{" "}
         <a
           href="mailto:juniorgocode@gmail.com"
           className={classes.externalLink}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           sending me an email
         </a>{" "}
@@ -51,27 +62,46 @@ export default function About() {
         <a
           href="https://twitter.com/juniorgocode"
           className={classes.externalLink}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           DM me via Twitter
         </a>
-        . I am happy to receive any feedbacks.
+        . I am happy to receive feedbacks.
       </Typography>
-      <Typography component="p" variant="h6" paragraph>
-        In my past time I enjoy learning new technologies or doing some small
+      <Typography
+        component="p"
+        variant="h6"
+        paragraph
+        style={{ marginBottom: "1.5rem" }}
+      >
+        In my free time, I enjoy learning new technologies or doing some small
         projects. Some of the most notable ones I have made is a clone of
         Evernote built with React and Firebase. The other one is called YelpCamp
-        built with Node and has many features of the famous app Yelp.
+        built with Node that has many features of the famous app Yelp.
       </Typography>
-      <Typography component="p" variant="h6" paragraph>
-        Other than programming I also play some games and read manga. My current
+      <Typography
+        component="p"
+        variant="h6"
+        paragraph
+        style={{ marginBottom: "1.5rem" }}
+      >
+        Other than programming I also play games and read manga. My current
         favorite game is Genshin Impact and my favorite manga, well, it is hard
         to choose a favorite one. I read a lot of manga after all.
       </Typography>
 
-      <Typography component="p" variant="h6" paragraph>
+      <Typography
+        component="p"
+        variant="h6"
+        paragraph
+        style={{ marginBottom: "1.5rem" }}
+      >
         <a
           href="https://twitter.com/juniorgocode"
           className={classes.externalLink}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Follow me on Twitter
         </a>

@@ -3,7 +3,7 @@
 ---
 
 Title: When does React batch state
-Date: 12/25/2021
+Date: 12/23/2021
 Description: We learned before that React states sometimes get batched together into one single state update instead of individual update. But some other times this is not the case.
 
 ---
